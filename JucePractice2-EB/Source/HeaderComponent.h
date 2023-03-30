@@ -11,6 +11,8 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "MainComponent.h"
+#include "ColorPalette.h"
 
 //==============================================================================
 /*
@@ -18,7 +20,7 @@
 class HeaderComponent  : public juce::Component
 {
 public:
-    HeaderComponent();
+    HeaderComponent(ProjectColors::ColorPalette colorPalette);
     ~HeaderComponent() override;
 
     void paint (juce::Graphics&) override;

@@ -1,8 +1,10 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent()
+MainComponent::MainComponent() : colorPalette(), header(HeaderComponent(colorPalette))
 {
+    addAndMakeVisible(header);
+    //ProjectColors::ColorPalette colorPalette;
     // Make sure you set the size of the component after
     // you add any child components.
     setSize (800, 600);
@@ -61,6 +63,15 @@ void MainComponent::releaseResources()
 //==============================================================================
 void MainComponent::paint (juce::Graphics& g)
 {
+
+    /*juce::LookAndFeel_V4::ColourScheme colourScheme;
+    colourScheme.setUIColour(juce::LookAndFeel_V4::ColourScheme::defaultFill, juce::Colour::Colour(60, 179, 113));
+    colourScheme.setUIColour(juce::LookAndFeel_V4::ColourScheme::highlightedFill, juce::Colour::Colour(40, 159, 93));
+
+    juce::LookAndFeel_V4 *lookFeel;
+    lookFeel->setColourScheme(colourScheme);
+    setLookAndFeel(lookFeel);*/
+
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 

@@ -12,7 +12,7 @@
 #include "HeaderComponent.h"
 
 //==============================================================================
-HeaderComponent::HeaderComponent()
+HeaderComponent::HeaderComponent(ProjectColors::ColorPalette colorPalette)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
