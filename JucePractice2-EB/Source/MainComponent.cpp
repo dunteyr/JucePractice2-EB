@@ -3,6 +3,7 @@
 //==============================================================================
 MainComponent::MainComponent() : colorPalette(), header(HeaderComponent(colorPalette))
 {
+
     addAndMakeVisible(header);
     //ProjectColors::ColorPalette colorPalette;
     // Make sure you set the size of the component after

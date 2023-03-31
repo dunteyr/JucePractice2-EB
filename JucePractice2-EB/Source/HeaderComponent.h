@@ -29,5 +29,11 @@ private:
     
     const ProjectColors::ColorPalette & headerColors;
 
+    juce::ShapeButton openButton;
+    juce::ShapeButton clearButton;
+    juce::ShapeButton settingsButton;
+
+    juce::Path makeButtonShape();
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HeaderComponent)
 };
