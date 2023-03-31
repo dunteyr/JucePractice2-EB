@@ -80,6 +80,9 @@ void MainComponent::paint (juce::Graphics& g)
 
 void MainComponent::resized()
 {
+    int headerHeight = 48;
+
+    header.setBounds(0, 0, getWidth(), headerHeight);
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.

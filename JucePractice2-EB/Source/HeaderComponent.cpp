@@ -8,12 +8,13 @@
   ==============================================================================
 */
 
-#include <JuceHeader.h>
 #include "HeaderComponent.h"
 
 //==============================================================================
-HeaderComponent::HeaderComponent(ProjectColors::ColorPalette colorPalette)
+HeaderComponent::HeaderComponent(const ProjectColors::ColorPalette & colorPalette) : 
+    headerColors(colorPalette)
 {
+    //addAndMakeVisible(headerPanel);
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
@@ -32,17 +33,16 @@ void HeaderComponent::paint (juce::Graphics& g)
        drawing code..
     */
 
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    g.fillAll (headerColors.normalColour);
 
-    g.setColour (juce::Colours::grey);
+    g.setColour (headerColors.normalColour);
     g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (juce::Colours::white);
 
 }
 
 void HeaderComponent::resized()
 {
+    //headerPanel.setBounds(0, 0, getWidth(), getHeight());
     // This method is where you should set the bounds of any child
     // components that your component contains..
 

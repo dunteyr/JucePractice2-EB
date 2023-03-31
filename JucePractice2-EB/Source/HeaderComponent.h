@@ -11,7 +11,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "MainComponent.h"
 #include "ColorPalette.h"
 
 //==============================================================================
@@ -20,12 +19,15 @@
 class HeaderComponent  : public juce::Component
 {
 public:
-    HeaderComponent(ProjectColors::ColorPalette colorPalette);
+    HeaderComponent(const ProjectColors::ColorPalette & colorPalette);
     ~HeaderComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    
+    const ProjectColors::ColorPalette & headerColors;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HeaderComponent)
 };
