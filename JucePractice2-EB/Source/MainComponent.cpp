@@ -1,10 +1,11 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : colorPalette(), header(HeaderComponent(colorPalette))
+MainComponent::MainComponent() : colorPalette(), header(HeaderComponent(colorPalette)), samplePlayer(SamplePlayerComponent(colorPalette))
 {
 
     addAndMakeVisible(header);
+    addAndMakeVisible(samplePlayer);
     //ProjectColors::ColorPalette colorPalette;
     // Make sure you set the size of the component after
     // you add any child components.
@@ -81,10 +82,16 @@ void MainComponent::paint (juce::Graphics& g)
 
 void MainComponent::resized()
 {
+    auto area = getLocalBounds();
+
     int headerHeight = 48;
 
-    header.setBounds(0, 0, getWidth(), headerHeight);
-    // This is called when the MainContentComponent is resized.
-    // If you add any child components, this is where you should
-    // update their positions.
+
+    header.setBounds(area.removeFromTop(headerHeight)); //Add header to very top
+
+    //split remaining area into left and right
+    auto leftArea = area.removeFromLeft(getWidth() / 2);
+    auto &rightArea = area;
+
+    samplePlayer.setBounds(leftArea.removeFromTop(getHeight() / 4)); //divide left side into 4 slots and add player at top
 }

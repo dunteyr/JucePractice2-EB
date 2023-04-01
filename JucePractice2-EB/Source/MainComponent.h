@@ -3,6 +3,7 @@
 #include <JuceHeader.h>
 #include "HeaderComponent.h"
 #include "ColorPalette.h"
+#include "SamplePlayerComponent.h"
 
 //==============================================================================
 /*
@@ -30,6 +31,7 @@ private:
     
     ProjectColors::ColorPalette colorPalette;
     HeaderComponent header;
+    SamplePlayerComponent samplePlayer;
     
 
 

@@ -616,6 +616,9 @@
     <ClCompile Include="..\..\Source\HeaderComponent.cpp">
       <Filter>JucePractice2-EB\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SamplePlayerComponent.cpp">
+      <Filter>JucePractice2-EB\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_Analytics.cpp">
       <Filter>JUCE Modules\juce_analytics\analytics</Filter>
     </ClCompile>
@@ -3085,6 +3088,9 @@
       <Filter>JucePractice2-EB\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ColorPalette.h">
+      <Filter>JucePractice2-EB\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SamplePlayerComponent.h">
       <Filter>JucePractice2-EB\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_Analytics.h">

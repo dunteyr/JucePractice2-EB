@@ -13,6 +13,10 @@
       <FILE id="Ex7OJy" name="HeaderComponent.h" compile="0" resource="0"
             file="Source/HeaderComponent.h"/>
       <FILE id="HoBuis" name="ColorPalette.h" compile="0" resource="0" file="Source/ColorPalette.h"/>
+      <FILE id="jtmzsa" name="SamplePlayerComponent.cpp" compile="1" resource="0"
+            file="Source/SamplePlayerComponent.cpp"/>
+      <FILE id="JNUXgE" name="SamplePlayerComponent.h" compile="0" resource="0"
+            file="Source/SamplePlayerComponent.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
