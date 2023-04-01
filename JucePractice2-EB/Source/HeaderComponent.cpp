@@ -12,17 +12,30 @@
 
 //==============================================================================
 HeaderComponent::HeaderComponent(const ProjectColors::ColorPalette & colorPalette) : 
-    headerColors(colorPalette),
-    openButton("OpenButton", headerColors.normalColour, headerColors.overColour, headerColors.downColour),
-    clearButton("OpenButton", headerColors.normalColour, headerColors.overColour, headerColors.downColour),
-    settingsButton("OpenButton", headerColors.normalColour, headerColors.overColour, headerColors.downColour)
+    headerColors(colorPalette)    
 {
+    //setting outline colour from the default lookandfeel
+    getLookAndFeel().setColour(juce::ComboBox::ColourIds::outlineColourId, headerColors.normalColour);
+
     addAndMakeVisible(openButton);
-    openButton.setShape(makeButtonShape(), true, true, false);
+    openButton.setButtonText("Open");
+    openButton.setColour(juce::TextButton::ColourIds::buttonColourId, headerColors.normalColour);
+    openButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, headerColors.normalColour);
+    openButton.setConnectedEdges(juce::Button::ConnectedEdgeFlags::ConnectedOnLeft + juce::Button::ConnectedEdgeFlags::ConnectedOnRight);
+    openButton.setToggleable(false);
     addAndMakeVisible(clearButton);
-    clearButton.setShape(makeButtonShape(), true, true, false);
+    clearButton.setButtonText("Clear");
+    clearButton.setColour(juce::TextButton::ColourIds::buttonColourId, headerColors.normalColour);
+    clearButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, headerColors.normalColour);
+    clearButton.setConnectedEdges(juce::Button::ConnectedEdgeFlags::ConnectedOnLeft + juce::Button::ConnectedEdgeFlags::ConnectedOnRight);
+    clearButton.setToggleable(false);
     addAndMakeVisible(settingsButton);
-    settingsButton.setShape(makeButtonShape(), true, true, false);
+    settingsButton.setButtonText("Settings");
+    settingsButton.setColour(juce::TextButton::ColourIds::buttonColourId, headerColors.normalColour);
+    settingsButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, headerColors.normalColour);
+    settingsButton.setConnectedEdges(juce::Button::ConnectedEdgeFlags::ConnectedOnLeft + juce::Button::ConnectedEdgeFlags::ConnectedOnRight);
+    settingsButton.setToggleable(false);
+
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
@@ -51,7 +64,7 @@ void HeaderComponent::paint (juce::Graphics& g)
 void HeaderComponent::resized()
 {
     int leftPadding = 16;
-    int buttonWidth = 48;
+    int buttonWidth = 64;
 
     openButton.setBounds(leftPadding, 0, buttonWidth, getHeight());
     clearButton.setBounds(openButton.getBounds().getRight(), 0, buttonWidth, getHeight());
@@ -61,11 +74,4 @@ void HeaderComponent::resized()
 
 }
 
-juce::Path HeaderComponent::makeButtonShape()
-{
-    juce::Path shape;
 
-    shape.addRectangle(0.0, 0.0, 4.0, 4.0);
-
-    return shape;
-}
