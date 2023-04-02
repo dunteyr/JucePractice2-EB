@@ -13,12 +13,15 @@
 
 //==============================================================================
 SamplePlayerComponent::SamplePlayerComponent(ProjectColors::ColorPalette componentColors) : 
-    playButton(juce::ShapeButton("SamplePlayButton", componentColors.normalColour, componentColors.normalColour, componentColors.normalColour))
+    playButton(juce::ShapeButton("SamplePlayButton", componentColors.normalColour, componentColors.overColour, componentColors.downColour))
 {
     addAndMakeVisible(playButton);
-    playButton.setShape(makePlayButtonShape(true), true, true, false);
+    playButton.setShape(makePlayButtonShape(true), false, true, false);
     addAndMakeVisible(sampleStatusText);
     sampleStatusText.setText("No sample opened");
+    sampleStatusText.setJustification(juce::Justification::centredLeft);
+    sampleStatusText.setColour(juce::Colour::fromRGB(255, 255, 255));
+    
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
@@ -47,10 +50,34 @@ void SamplePlayerComponent::paint (juce::Graphics& g)
 void SamplePlayerComponent::resized()
 {
     auto area = getLocalBounds();
+
+    int buttonPadding = 16;
+    int textPadding = 50;
     
 
-    playButton.setBounds(area.removeFromLeft(getWidth() / 4)); //button takes left quarter of component
-    sampleStatusText.setBounds(area); //text takes up remaining space in component
+    auto buttonArea = area.removeFromLeft(getWidth() / 6); //button takes left sixth of component
+    playButton.setBounds(buttonArea.withSizeKeepingCentre(buttonArea.getWidth() - buttonPadding, buttonArea.getHeight() - buttonPadding)); //shrink size by padding amount
+
+    //text takes up remaining space in component with padding
+    sampleStatusText.setBounds(area.withSizeKeepingCentre(area.getWidth() - textPadding, area.getHeight() - textPadding));
+
+    /*The text isn't actually drawn to fill the bounds. It is drawn to fill a bounding box that is inside the bounds
+    and the bounding box is a parallelogram instead of a rectangle. You can make a parallelogram with a rectangle but it has to be
+    of type rectangle<float> where the text componenent bounds are a rectangle<int>. So I made rectangle<float> from the rectangle<int> in order 
+    to make the Parallelogram to set the bounding box to the same size as the bounds. Ugh.*/
+    sampleStatusText.setBoundingBox
+    (
+        juce::Parallelogram
+        (
+            juce::Rectangle<float>
+            (
+                sampleStatusText.getBounds().getX(), 
+                sampleStatusText.getBounds().getY(), 
+                sampleStatusText.getWidth(), 
+                sampleStatusText.getHeight()
+            )
+        )
+    );
 
 }
 

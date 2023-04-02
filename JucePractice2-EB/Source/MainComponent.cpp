@@ -89,9 +89,10 @@ void MainComponent::resized()
 
     header.setBounds(area.removeFromTop(headerHeight)); //Add header to very top
 
-    //split remaining area into left and right
-    auto leftArea = area.removeFromLeft(getWidth() / 2);
+    //split remaining area into 3
+    auto leftArea = area.removeFromLeft(getWidth() / 3);
+    auto centerArea = area.removeFromLeft(getWidth() / 2);
     auto &rightArea = area;
 
-    samplePlayer.setBounds(leftArea.removeFromTop(getHeight() / 4)); //divide left side into 4 slots and add player at top
+    samplePlayer.setBounds(leftArea.removeFromTop(getHeight() / 6)); //divide left side into 6 slots and add player at top
 }
