@@ -17,6 +17,9 @@ SamplePlayerComponent::SamplePlayerComponent(ProjectColors::ColorPalette compone
 {
     addAndMakeVisible(playButton);
     playButton.setShape(makePlayButtonShape(true), false, true, false);
+
+    playButton.onClick = [this] { onPlayButtonClick(); };
+
     addAndMakeVisible(sampleStatusText);
     sampleStatusText.setText("No sample opened");
     sampleStatusText.setJustification(juce::Justification::centredLeft);
@@ -42,8 +45,6 @@ void SamplePlayerComponent::paint (juce::Graphics& g)
 
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
 
 }
 
@@ -107,4 +108,19 @@ juce::Path SamplePlayerComponent::makePlayButtonShape(bool playShape)
         return roundedShape;      
     }
     
+}
+
+void SamplePlayerComponent::onPlayButtonClick()
+{
+    if (isPlaying)
+    {
+        isPlaying = false;
+        playButton.setShape(makePlayButtonShape(true), false, true, false);
+    }
+
+    else
+    {
+        isPlaying = true;
+        playButton.setShape(makePlayButtonShape(false), false, true, false);
+    }
 }

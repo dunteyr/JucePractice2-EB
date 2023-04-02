@@ -26,10 +26,12 @@ public:
     void resized() override;
 
 private:
+    bool isPlaying = false;
 
     juce::ShapeButton playButton;
     juce::DrawableText sampleStatusText;
 
     juce::Path makePlayButtonShape(bool playShape);
+    void onPlayButtonClick();
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SamplePlayerComponent)
 };
