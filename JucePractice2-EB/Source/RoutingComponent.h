@@ -28,6 +28,8 @@ public:
     void getNextAudioBlock(const juce::AudioSourceChannelInfo& bufferToFill) override;
     void releaseResources() override;
 
+    
+
 private:
 
     juce::ComboBox compSlot1;
@@ -35,6 +37,8 @@ private:
     juce::ComboBox compSlot3;
     juce::ComboBox compSlot4;
     juce::ComboBox compSlot5;
+
+    void initCompSlot(juce::ComboBox & slot);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (RoutingComponent)
 };

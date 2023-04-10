@@ -14,11 +14,11 @@
 //==============================================================================
 RoutingComponent::RoutingComponent()
 {
-    addAndMakeVisible(compSlot1);
-    addAndMakeVisible(compSlot2);
-    addAndMakeVisible(compSlot3);
-    addAndMakeVisible(compSlot4);
-    addAndMakeVisible(compSlot5);
+    initCompSlot(compSlot1);
+    initCompSlot(compSlot2);
+    initCompSlot(compSlot3);
+    initCompSlot(compSlot4);
+    initCompSlot(compSlot5);
 
 }
 
@@ -44,6 +44,27 @@ void RoutingComponent::paint(juce::Graphics& g)
 
 void RoutingComponent::resized()
 {
+    auto area = getLocalBounds();
+
+    //chop off upper tenth for padding
+    //auto upperPadding = area.removeFromTop(getHeight() / 4);
+
+    //amount to shrink each compSlots bounds by
+    int reductionX = (area.getWidth() / 5) / 10;
+    int reductionY = (area.getHeight() / 5);
+
+    //for every component slot, give it an equal portion of space. Then shrink it down slightly
+    compSlot1.setBounds(area.removeFromLeft(area.getWidth() / 5));
+    compSlot1.setBounds(compSlot1.getBounds().reduced(reductionX, reductionY));
+    compSlot2.setBounds(area.removeFromLeft(area.getWidth() / 4));
+    compSlot2.setBounds(compSlot2.getBounds().reduced(reductionX, reductionY));
+    compSlot3.setBounds(area.removeFromLeft(area.getWidth() / 3));
+    compSlot3.setBounds(compSlot3.getBounds().reduced(reductionX, reductionY));
+    compSlot4.setBounds(area.removeFromLeft(area.getWidth() / 2));
+    compSlot4.setBounds(compSlot4.getBounds().reduced(reductionX, reductionY));
+    compSlot5.setBounds(area.removeFromLeft(area.getWidth()));
+    compSlot5.setBounds(compSlot5.getBounds().reduced(reductionX, reductionY));
+
 
 
 }
@@ -61,4 +82,16 @@ void RoutingComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo& buf
 void RoutingComponent::releaseResources()
 {
 
+}
+
+void RoutingComponent::initCompSlot(juce::ComboBox & slot)
+{
+    addAndMakeVisible(slot);
+
+    slot.addItem("None", 1);
+    slot.addItem("Filter", 2);
+    slot.addItem("Reverb", 3);
+    slot.addItem("Phaser", 4);
+    slot.addItem("Chorus", 5);
+    slot.addItem("Compressor", 6);
 }
