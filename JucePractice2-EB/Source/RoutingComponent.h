@@ -39,6 +39,7 @@ private:
     juce::ComboBox compSlot5;
 
     void initCompSlot(juce::ComboBox & slot);
+    void drawRoutingLine(juce::Graphics& g);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (RoutingComponent)
 };

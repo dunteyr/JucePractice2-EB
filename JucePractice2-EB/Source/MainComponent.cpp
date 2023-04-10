@@ -92,5 +92,5 @@ void MainComponent::resized()
     samplePlayer.setBounds(leftArea);
 
     //split the remaining area to give a row to the routing component
-    routingComp.setBounds(area.removeFromTop(getHeight() / 5)); //routingComp row is same size as sample player row
+    routingComp.setBounds(area.removeFromTop(getHeight() / 8)); 
 }

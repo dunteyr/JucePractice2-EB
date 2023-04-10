@@ -37,8 +37,7 @@ void RoutingComponent::paint(juce::Graphics& g)
 
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));   // clear the background
 
-    g.setColour(juce::Colours::grey);
-    g.drawRect(getLocalBounds(), 1);   // draw an outline around the component
+    drawRoutingLine(g);
 
 }
 
@@ -94,4 +93,16 @@ void RoutingComponent::initCompSlot(juce::ComboBox & slot)
     slot.addItem("Phaser", 4);
     slot.addItem("Chorus", 5);
     slot.addItem("Compressor", 6);
+}
+
+void RoutingComponent::drawRoutingLine(juce::Graphics& g)
+{
+
+    g.setColour(getLookAndFeel().findColour(juce::ComboBox::ColourIds::outlineColourId));
+    g.drawHorizontalLine(getHeight() / 2, 0.0, compSlot1.getBounds().getTopLeft().x);
+    g.drawHorizontalLine(getHeight() / 2, compSlot1.getBounds().getTopRight().x, compSlot2.getBounds().getTopLeft().x);
+    g.drawHorizontalLine(getHeight() / 2, compSlot2.getBounds().getTopRight().x, compSlot3.getBounds().getTopLeft().x);
+    g.drawHorizontalLine(getHeight() / 2, compSlot3.getBounds().getTopRight().x, compSlot4.getBounds().getTopLeft().x);
+    g.drawHorizontalLine(getHeight() / 2, compSlot4.getBounds().getTopRight().x, compSlot5.getBounds().getTopLeft().x);
+    g.drawHorizontalLine(getHeight() / 2, compSlot5.getBounds().getTopRight().x, getWidth());
 }
