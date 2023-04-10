@@ -17,6 +17,10 @@
             file="Source/SamplePlayerComponent.cpp"/>
       <FILE id="JNUXgE" name="SamplePlayerComponent.h" compile="0" resource="0"
             file="Source/SamplePlayerComponent.h"/>
+      <FILE id="O4QQ9J" name="RoutingComponent.cpp" compile="1" resource="0"
+            file="Source/RoutingComponent.cpp"/>
+      <FILE id="QW60c9" name="RoutingComponent.h" compile="0" resource="0"
+            file="Source/RoutingComponent.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>

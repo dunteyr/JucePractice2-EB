@@ -4,6 +4,7 @@
 #include "HeaderComponent.h"
 #include "ColorPalette.h"
 #include "SamplePlayerComponent.h"
+#include "RoutingComponent.h"
 
 //==============================================================================
 /*
@@ -32,6 +33,7 @@ private:
     ProjectColors::ColorPalette colorPalette;
     HeaderComponent header;
     SamplePlayerComponent samplePlayer;
+    RoutingComponent routingComp;
     
 
 

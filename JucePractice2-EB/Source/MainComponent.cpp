@@ -10,6 +10,7 @@ MainComponent::MainComponent() :
 
     addAndMakeVisible(header);
     addAndMakeVisible(samplePlayer);
+    addAndMakeVisible(routingComp);
     //ProjectColors::ColorPalette colorPalette;
     // Make sure you set the size of the component after
     // you add any child components.
@@ -79,10 +80,17 @@ void MainComponent::resized()
 
     header.setBounds(area.removeFromTop(headerHeight)); //Add header to very top
 
-    //split remaining area into 3
-    auto leftArea = area.removeFromLeft(getWidth() / 3);
-    auto centerArea = area.removeFromLeft(getWidth() / 2);
-    auto &rightArea = area;
+    //create a row where sample players would fit
+    auto samplePlayerArea = area.removeFromTop(getHeight() / 6);
 
-    samplePlayer.setBounds(leftArea.removeFromTop(getHeight() / 6)); //divide left side into 6 slots and add player at top
+    //split sample player area into 3
+    auto leftArea = samplePlayerArea.removeFromLeft(getWidth() / 3);
+    auto centerArea = samplePlayerArea.removeFromLeft(getWidth() / 2);
+    auto &rightArea = samplePlayerArea;
+
+    //give left most slot in the sample area row to the sample player
+    samplePlayer.setBounds(leftArea);
+
+    //split the remaining area to give a row to the routing component
+    routingComp.setBounds(area.removeFromTop(getHeight() / 5)); //routingComp row is same size as sample player row
 }

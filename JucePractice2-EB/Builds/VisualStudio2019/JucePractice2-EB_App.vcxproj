@@ -145,6 +145,7 @@
     <ClCompile Include="..\..\Source\MainComponent.cpp"/>
     <ClCompile Include="..\..\Source\HeaderComponent.cpp"/>
     <ClCompile Include="..\..\Source\SamplePlayerComponent.cpp"/>
+    <ClCompile Include="..\..\Source\RoutingComponent.cpp"/>
     <ClCompile Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_Analytics.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -2457,6 +2458,7 @@
     <ClInclude Include="..\..\Source\HeaderComponent.h"/>
     <ClInclude Include="..\..\Source\ColorPalette.h"/>
     <ClInclude Include="..\..\Source\SamplePlayerComponent.h"/>
+    <ClInclude Include="..\..\Source\RoutingComponent.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_Analytics.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_ButtonTracker.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\destinations\juce_AnalyticsDestination.h"/>
