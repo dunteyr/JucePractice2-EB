@@ -13,8 +13,13 @@
 
 //==============================================================================
 SamplePlayerComponent::SamplePlayerComponent(ProjectColors::ColorPalette componentColors) : 
+    currentState(Stopped),
     playButton(juce::ShapeButton("SamplePlayButton", componentColors.normalColour, componentColors.overColour, componentColors.downColour))
 {
+    formatManager.registerBasicFormats();
+
+    transportSource.addChangeListener(this);
+
     addAndMakeVisible(playButton);
     playButton.setShape(makePlayButtonShape(true), false, true, false);
 
@@ -82,6 +87,27 @@ void SamplePlayerComponent::resized()
 
 }
 
+void SamplePlayerComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
+{
+    transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
+}
+
+void SamplePlayerComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo& bufferToFill)
+{
+    if (readerSource.get() == nullptr)
+    {
+        bufferToFill.clearActiveBufferRegion();
+        return;
+    }
+
+    transportSource.getNextAudioBlock(bufferToFill);
+}
+
+void SamplePlayerComponent::releaseResources()
+{
+    transportSource.releaseResources();
+}
+
 juce::Path SamplePlayerComponent::makePlayButtonShape(bool playShape)
 {
     //makes triangle play shape
@@ -112,15 +138,63 @@ juce::Path SamplePlayerComponent::makePlayButtonShape(bool playShape)
 
 void SamplePlayerComponent::onPlayButtonClick()
 {
-    if (isPlaying)
+    //stop button pressed
+    if (currentState == Playing)
     {
-        isPlaying = false;
-        playButton.setShape(makePlayButtonShape(true), false, true, false);
+        changeState(Stopping);       
     }
 
-    else
+    //play button pressed
+    else if(currentState == Stopped)
     {
-        isPlaying = true;
-        playButton.setShape(makePlayButtonShape(false), false, true, false);
+        changeState(Starting);
+    }
+}
+
+void SamplePlayerComponent::changeListenerCallback(juce::ChangeBroadcaster* source)
+{
+    if (source == &transportSource)
+    {
+        if (transportSource.isPlaying())
+            changeState(Playing);
+        else
+            changeState(Stopped);
+    }
+}
+
+void SamplePlayerComponent::changeState(TransportState newState)
+{
+    if (currentState != newState)
+    {
+        currentState = newState;
+
+        if (currentState == Stopped)
+        {
+            transportSource.setPosition(0.0);
+            playButton.setShape(makePlayButtonShape(true), false, true, false); //change to play button
+        }
+
+        else if (currentState == Starting)
+        {
+            transportSource.start(); //triggers changeListenerCallback
+        }
+
+        else if (currentState == Playing) 
+        {
+            playButton.setShape(makePlayButtonShape(false), false, true, false); //change to stop button
+        }
+
+        else if (currentState == Stopping)
+        {
+            transportSource.stop(); //triggers changeListenerCallback
+        }
+    }
+}
+
+void SamplePlayerComponent::setSampleStatusText(juce::String newText)
+{
+    if (sampleStatusText.getText() != newText)
+    {
+        sampleStatusText.setText(newText);
     }
 }

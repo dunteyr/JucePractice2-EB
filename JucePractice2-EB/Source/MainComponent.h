@@ -28,7 +28,7 @@ public:
 
 
 private:
-    
+
     ProjectColors::ColorPalette colorPalette;
     HeaderComponent header;
     SamplePlayerComponent samplePlayer;

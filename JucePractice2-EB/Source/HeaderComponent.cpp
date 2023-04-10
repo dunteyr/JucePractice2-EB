@@ -11,9 +11,11 @@
 #include "HeaderComponent.h"
 
 //==============================================================================
-HeaderComponent::HeaderComponent(const ProjectColors::ColorPalette & colorPalette) : 
-    headerColors(colorPalette)    
+HeaderComponent::HeaderComponent(const ProjectColors::ColorPalette & colorPalette, SamplePlayerComponent & mainSamplePlayer) : 
+    headerColors(colorPalette),
+    samplePlayer(mainSamplePlayer)
 {
+
     //setting outline colour from the default lookandfeel
     getLookAndFeel().setColour(juce::ComboBox::ColourIds::outlineColourId, headerColors.normalColour);
 
@@ -23,6 +25,7 @@ HeaderComponent::HeaderComponent(const ProjectColors::ColorPalette & colorPalett
     openButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, headerColors.normalColour);
     openButton.setConnectedEdges(juce::Button::ConnectedEdgeFlags::ConnectedOnLeft + juce::Button::ConnectedEdgeFlags::ConnectedOnRight);
     openButton.setToggleable(false);
+    openButton.onClick = [this] { openButtonClicked(); };
     addAndMakeVisible(clearButton);
     clearButton.setButtonText("Clear");
     clearButton.setColour(juce::TextButton::ColourIds::buttonColourId, headerColors.normalColour);
@@ -73,5 +76,36 @@ void HeaderComponent::resized()
     // components that your component contains..
 
 }
+
+void HeaderComponent::openButtonClicked()
+{
+    /*this chooser has to be declared as member data. it was previously "auto chooser = ..." but that made the
+    window appear for a tiny fraction of a second. Something to do with the object being destroyed*/
+    chooser = std::make_unique<juce::FileChooser>("Choose a Wav file...", juce::File{}, "*.wav");
+
+    auto chooserFlags = juce::FileBrowserComponent::openMode
+        | juce::FileBrowserComponent::canSelectFiles;
+
+    //good lord
+    chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+        {
+            auto file = fc.getResult();
+
+            if (file != juce::File{})
+            {
+                auto* reader = samplePlayer.formatManager.createReaderFor(file);
+
+                if (reader != nullptr)
+                {
+                    auto newSource = std::make_unique<juce::AudioFormatReaderSource>(reader, true);
+                    samplePlayer.transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
+                    samplePlayer.setSampleStatusText("Sample loaded");
+                    samplePlayer.readerSource.reset(newSource.release());
+
+                }
+            }
+        });
+}
+
 
 
