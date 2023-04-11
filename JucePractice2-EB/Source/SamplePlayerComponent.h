@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "ColorPalette.h"
+#include "SpectrumComponent.h"
 
 //==============================================================================
 /*
@@ -19,7 +20,7 @@
 class SamplePlayerComponent  : public juce::AudioAppComponent, public juce::ChangeListener
 {
 public:
-    SamplePlayerComponent(ProjectColors::ColorPalette componentColors);
+    SamplePlayerComponent(ProjectColors::ColorPalette componentColors, SpectrumComponent& spectrum);
     ~SamplePlayerComponent() override;
 
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
@@ -52,6 +53,8 @@ private:
     juce::DrawableText sampleStatusText;
 
     TransportState state;
+
+    SpectrumComponent& spectrumComp;
 
     void changeListenerCallback(juce::ChangeBroadcaster* source) override;
 

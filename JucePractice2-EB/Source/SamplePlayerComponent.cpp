@@ -12,7 +12,8 @@
 #include "SamplePlayerComponent.h"
 
 //==============================================================================
-SamplePlayerComponent::SamplePlayerComponent(ProjectColors::ColorPalette componentColors) : 
+SamplePlayerComponent::SamplePlayerComponent(ProjectColors::ColorPalette componentColors, SpectrumComponent& spectrum) :
+    spectrumComp(spectrum),
     currentState(Stopped),
     playButton(juce::ShapeButton("SamplePlayButton", componentColors.normalColour, componentColors.overColour, componentColors.downColour))
 {
@@ -30,8 +31,6 @@ SamplePlayerComponent::SamplePlayerComponent(ProjectColors::ColorPalette compone
     sampleStatusText.setJustification(juce::Justification::centredLeft);
     sampleStatusText.setColour(juce::Colour::fromRGB(255, 255, 255));
     
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
 
 }
 
@@ -101,6 +100,15 @@ void SamplePlayerComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo
     }
 
     transportSource.getNextAudioBlock(bufferToFill);
+
+    //pass the audio buffer to the spectrum component
+    if (bufferToFill.buffer->getNumChannels() > 0)
+    {
+        auto* channelData = bufferToFill.buffer->getReadPointer(0, bufferToFill.startSample);
+
+        for (auto i = 0; i < bufferToFill.numSamples; ++i)
+            spectrumComp.pushNextSampleIntoFifo(channelData[i]);
+    }
 }
 
 void SamplePlayerComponent::releaseResources()

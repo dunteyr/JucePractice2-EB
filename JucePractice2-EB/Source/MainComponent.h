@@ -33,9 +33,10 @@ private:
 
     ProjectColors::ColorPalette colorPalette;
     HeaderComponent header;
+    SpectrumComponent spectrumComp;
     SamplePlayerComponent samplePlayer;
     RoutingComponent routingComp;
-    SpectrumComponent spectrumComp;
+    
 
     
 

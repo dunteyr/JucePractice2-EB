@@ -3,7 +3,8 @@
 //==============================================================================
 MainComponent::MainComponent() : 
     colorPalette(), 
-    samplePlayer(SamplePlayerComponent(colorPalette)),
+    spectrumComp(),
+    samplePlayer(SamplePlayerComponent(colorPalette, spectrumComp)),
     header(HeaderComponent(colorPalette, samplePlayer))
     
 {
@@ -12,6 +13,7 @@ MainComponent::MainComponent() :
     addAndMakeVisible(samplePlayer);
     addAndMakeVisible(routingComp);
     addAndMakeVisible(spectrumComp);
+    spectrumComp.startSpectrum(); //starts the components update timer
     //ProjectColors::ColorPalette colorPalette;
     // Make sure you set the size of the component after
     // you add any child components.
@@ -45,7 +47,7 @@ void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRat
 
 void MainComponent::getNextAudioBlock (const juce::AudioSourceChannelInfo& bufferToFill)
 {
-
+    //pass the audio buffer to the sample player to be filled
     samplePlayer.getNextAudioBlock(bufferToFill);
 }
 
