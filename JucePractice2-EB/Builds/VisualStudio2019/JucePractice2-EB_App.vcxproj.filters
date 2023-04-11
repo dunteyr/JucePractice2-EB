@@ -622,6 +622,9 @@
     <ClCompile Include="..\..\Source\RoutingComponent.cpp">
       <Filter>JucePractice2-EB\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SpectrumComponent.cpp">
+      <Filter>JucePractice2-EB\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_Analytics.cpp">
       <Filter>JUCE Modules\juce_analytics\analytics</Filter>
     </ClCompile>
@@ -3097,6 +3100,9 @@
       <Filter>JucePractice2-EB\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\RoutingComponent.h">
+      <Filter>JucePractice2-EB\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpectrumComponent.h">
       <Filter>JucePractice2-EB\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\Program Files\JUCE\JUCE\modules\juce_analytics\analytics\juce_Analytics.h">

@@ -5,6 +5,7 @@
 #include "ColorPalette.h"
 #include "SamplePlayerComponent.h"
 #include "RoutingComponent.h"
+#include "SpectrumComponent.h"
 
 //==============================================================================
 /*
@@ -34,6 +35,8 @@ private:
     HeaderComponent header;
     SamplePlayerComponent samplePlayer;
     RoutingComponent routingComp;
+    SpectrumComponent spectrumComp;
+
     
 
 

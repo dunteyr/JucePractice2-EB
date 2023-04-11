@@ -21,6 +21,10 @@
             file="Source/RoutingComponent.cpp"/>
       <FILE id="QW60c9" name="RoutingComponent.h" compile="0" resource="0"
             file="Source/RoutingComponent.h"/>
+      <FILE id="QREORr" name="SpectrumComponent.cpp" compile="1" resource="0"
+            file="Source/SpectrumComponent.cpp"/>
+      <FILE id="vK9Zei" name="SpectrumComponent.h" compile="0" resource="0"
+            file="Source/SpectrumComponent.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
